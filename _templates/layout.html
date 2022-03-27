@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% extends "basic/layout.html" %}
+  {{ super() }}
+
+
+{% set css_files = css_files +
+  [ "_static/css/bootstrap.min.css",
+    "_static/css/f5.css",
+    "_static/css/f5-theme.css",
+    "_static/css/CoveoFullSearch.css",
+    "_static/css/custom.css",
+    "https://use.fontawesome.com/21fb8a09c3.css" ] %}
+
+{% set script_files = script_files + [
+  "https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js"
+  ]%}
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=xxxx" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+{# Do not create the standard relbars and sidebars #}
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+{%- block sidebar1 %}{% endblock %}
+{%- block sidebar2 %}{% endblock %}
+
+{%- block header %}
+<!--
+<div id="search-container" class="support-header">
+  <div class="slideable_content">
+    <div class="container">
+      <div id="blue-banner">
+        <span class="search-tips">
+          <a target="_blank" href="" class="internalLink">
+            Search tips
+            <span class="icon-1x-no-position icon-new-window" data-icon="new-window">
+            </span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+{% endblock %}
+
+
+<div class="wrapper">
+
+<div id="docs-wrapper" itemscope itemtype="http://schema.org/Article">
+
+{% block content %}
+
+  <div class="titlebar">
+      {%- block breadcrumb %}
+      {% include "breadcrumb.html" %}
+      {% endblock %}
+  </div>
+
+  <div class="titlebarbackground">
+      {%- block titlebarbackground %}
+      {% include "titlebarbackground.html" %}
+      {% endblock %}
+  </div>
+
+  {%- if sidebars != None %}
+    {%- block f5sidebar %}
+    <div id="sidebar" class="section-nav">
+      {% if (theme_version_selector) %}
+      <!--  version selector ------------------>
+      <div id="version_selector_wrapper">
+      </div>
+      {%- endif %}
+
+      {%- block searchbox %}
+      {% include "searchbox.html" %}
+      {% endblock %}
+
+      <nav class="nav-sidebartoc">
+
+<!--
+        {% if release %}
+        <h5>{{ project }} {{ release }} iTEST</h5>
+        {% else %}
+         <h5>{{ project }} {{ version }} jTEST</h5>
+        {% endif %}
+        <hr>
+-->
+        <span class="nav-sidebartoc">
+            {{ toctree(includehidden=True, collapse=True) }}
+        </span>
+      </nav>
+    </div>
+
+<!--
+    <div id="right-sidebar">
+      <h7 style="font-weight:normal">On this page</h7>
+      <nav class="nav-sidebartoc">
+        <span class="nav-sidebartoc">
+          {{ toc }}
+        </span>
+      </nav>
+    </div>
+-->
+
+    {%- endblock %}
+  {%- endif %}
+
+  {% block main %}
+  <div class="main active" id="content" >
+    <article class="docs-container site-article-inner">
+
+
+    <!--a title="Export PDF" id="export-pdf" class="btn btn btn-link pull-right">View PDF</a-->
+    <!--<button type="button" id="export-pdf" class="btn btn-link right"></button>-->
+
+<!--
+    {% if (theme_version_selector) %}
+     {% if (theme_enable_version_warning_banner) %}
+         <div class="sidebar" id="version-warning" style="display: none;">
+           <p class="first sidebar-title">
+           <span class="icon fa fa-info-circle fa-lg"></span> Version notice:</p>
+           <p class="last" id="currentVersion"></p>
+          </div>
+     {%- endif %}
+    {%- endif %}
+-->
+
+
+     <div role="main">
+        {% block body %}{% endblock %}
+     </div>
+
+    </article>
+  </div>
+  {%- endblock %}
+
+</div>
+
+{% endblock %}
+</div>
+
+{%- block footer %}
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+{% if (theme_version_selector) %}
+  <script src="{{ pathto('_static/js/index.js', 1) }}"></script>
+{%- endif %}
+  <script src="{{ pathto('_static/js/jquery.appear.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/printThis.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/clouddocs.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/CoveoJsSearch.Lazy.min.js', 1) }}"></script>
+
+{%- endblock %}
