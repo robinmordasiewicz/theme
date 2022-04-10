@@ -40,7 +40,7 @@ pipeline {
     stage('INIT') {
       steps {
         cleanWs()
-        checkout scm
+//        checkout scm
       }
     }
   }
