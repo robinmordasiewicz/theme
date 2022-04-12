@@ -3,6 +3,9 @@ pipeline {
     disableConcurrentBuilds()
     skipDefaultCheckout(true)
   }
+//  triggers {
+//    upstream(upstreamProjects: "sphinx", threshold: hudson.model.Result.SUCCESS)
+//  }
   agent {
     kubernetes {
       yaml '''
@@ -16,23 +19,12 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: kaniko
-            image: gcr.io/kaniko-project/executor:debug
+          - name: sphinx
+            image: robinhoodis/sphinx:0.0.44
             imagePullPolicy: IfNotPresent
             command:
-            - /busybox/cat
+            - cat
             tty: true
-            volumeMounts:
-              - name: kaniko-secret
-                mountPath: /kaniko/.docker
-          restartPolicy: Never
-          volumes:
-            - name: kaniko-secret
-              secret:
-                secretName: regcred
-                items:
-                  - key: .dockerconfigjson
-                    path: config.json
         '''
     }
   }
@@ -40,7 +32,63 @@ pipeline {
     stage('INIT') {
       steps {
         cleanWs()
-//        checkout scm
+        checkout scm
+      }
+    }
+    stage('mkdir docs') {
+      steps {
+        sh 'mkdir docs'
+      }
+    }
+    stage('checkout sphinx-theme') {
+      steps {
+        dir ( 'docs' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/sphinx-theme.git'
+        }
+      }
+    }
+    stage('checkout docs') {
+      steps {
+        dir ( 'docs' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/docs.git'
+        }
+      }
+    }
+    stage('make html') {
+      steps {
+        container('sphinx') {
+          // sh '[ -f docs/requirements.txt ] && /usr/bin/pip3 install -r docs/requirements.txt -U'
+          sh '/usr/bin/make -C docs clean html'
+        }
+      }
+    }
+    stage('copy html') {
+      steps {
+        sh 'mkdir nginx'
+        dir ( 'nginx' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/nginx.git'
+        }
+        sh 'rm -rf nginx/html'
+        sh 'cp -a docs/_build/html nginx/'
+        dir ( 'nginx' ) {
+          sh 'git status'
+        }
+      }
+    }
+    stage('git-commit') {
+      steps {
+        dir ( 'nginx' ) {
+          sh 'git config user.email "robin@mordasiewicz.com"'
+          sh 'git config user.name "Robin Mordasiewicz"'
+          sh 'git diff --quiet && git diff --staged --quiet || git commit -am "`date`"'
+          withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
+            // sh 'git diff --quiet && git diff --staged --quiet || git push origin main'
+            // 'git diff --quiet && git diff --staged --quiet || git push --tags'
+            sh 'git push origin HEAD:main'
+           // sh 'git push origin `cat ../VERSION`'
+            // sh 'git diff --quiet && git diff --staged --quiet || git push origin main'
+          }
+        }
       }
     }
   }
