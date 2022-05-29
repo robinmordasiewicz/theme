@@ -3,9 +3,6 @@ pipeline {
     disableConcurrentBuilds()
     skipDefaultCheckout(true)
   }
-//  triggers {
-//    upstream(upstreamProjects: "sphinx", threshold: hudson.model.Result.SUCCESS)
-//  }
   agent {
     kubernetes {
       yaml '''
