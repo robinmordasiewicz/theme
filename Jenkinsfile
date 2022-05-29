@@ -19,20 +19,15 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: sphinx
-            image: robinhoodis/sphinx:0.0.47
-            imagePullPolicy: Always
-            command:
-            - cat
-            tty: true
         '''
     }
   }
   stages {
     stage('INIT') {
       steps {
-        cleanWs()
-        checkout scm
+        container('ubuntu') {
+          sh 'echo "Job"'
+        }
       }
     }
   }
