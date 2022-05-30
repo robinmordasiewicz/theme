@@ -3,6 +3,9 @@
 
 #convert ${BACKGROUND} -verbose -strip -resize 1920x1080 -quality 100 -density 72x72 -units pixelsperinch tmp.png
 
+printenv
+env
+
 convert -size 1920x1080 xc:'#0F487A' tmp.png
 convert tmp.png -fill '#F2B819' -stroke '#F2B819' -draw "rectangle 0,1065 1920,1080" yellow.png
 convert yellow.png -fill '#DB0021' -stroke '#DB0021' -draw "rectangle 770,1065 1920,1080" yellow-red.png
