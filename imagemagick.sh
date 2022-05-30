@@ -1,10 +1,11 @@
 #!/bin/bash
 #
 
+source sphinx-theme/theme.conf
+source docs/index.conf
+
 #convert ${BACKGROUND} -verbose -strip -resize 1920x1080 -quality 100 -density 72x72 -units pixelsperinch tmp.png
 
-printenv
-env
 
 convert -size 1920x1080 xc:'#0F487A' tmp.png
 convert tmp.png -fill '#F2B819' -stroke '#F2B819' -draw "rectangle 0,1065 1920,1080" yellow.png
