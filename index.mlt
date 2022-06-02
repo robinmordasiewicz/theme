@@ -19,15 +19,15 @@
   <producer id="producer0" title="Anonymous Submission" in="00:00:00.000" out="03:59:59.993">
     <property name="length">03:59:60.027</property>
     <property name="eof">pause</property>
-    <property name="resource">intro.png</property>
+    <property name="resource">index.png</property>
     <property name="ttl">1</property>
     <property name="aspect_ratio">1</property>
     <property name="progressive">1</property>
     <property name="seekable">1</property>
     <property name="mlt_service">qimage</property>
     <property name="creation_time">2022-05-14T03:22:51</property>
-    <property name="shotcut:caption">intro.png</property>
-    <property name="shotcut:detail">intro.png</property>
+    <property name="shotcut:caption">index.png</property>
+    <property name="shotcut:detail">index.png</property>
     <property name="shotcut:hash">e51aff2ff52e0f02c0e688b688acb79f</property>
     <property name="ignore_points">0</property>
     <property name="global_feed">1</property>
@@ -36,15 +36,15 @@
   <producer id="producer1" title="Anonymous Submission" in="00:00:00.000" out="03:59:59.993">
     <property name="length">03:59:60.027</property>
     <property name="eof">pause</property>
-    <property name="resource">intro.png</property>
+    <property name="resource">index.png</property>
     <property name="ttl">1</property>
     <property name="aspect_ratio">1</property>
     <property name="progressive">1</property>
     <property name="seekable">1</property>
     <property name="mlt_service">qimage</property>
     <property name="creation_time">2022-05-14T03:22:51</property>
-    <property name="shotcut:caption">intro.png</property>
-    <property name="shotcut:detail">intro.png</property>
+    <property name="shotcut:caption">index.png</property>
+    <property name="shotcut:detail">index.png</property>
     <property name="shotcut:hash">e51aff2ff52e0f02c0e688b688acb79f</property>
     <property name="ignore_points">0</property>
     <property name="global_feed">1</property>
