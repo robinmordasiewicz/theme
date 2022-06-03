@@ -212,7 +212,7 @@
       <property name="shotcut:filter">affineSizePosition</property>
       <property name="transition.fill">0</property>
       <property name="transition.distort">0</property>
-      <property name="transition.rect">19 87 993 749 1</property>
+      <property name="transition.rect">687 35 1066 803 1</property>
       <property name="transition.valign">top</property>
       <property name="transition.halign">left</property>
       <property name="shotcut:animIn">00:00:00.000</property>
