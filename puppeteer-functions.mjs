@@ -140,3 +140,6 @@
       }
       throw new Error('Timed out');
     }
+
+module.exports = { waitForSelectors, scrollIntoViewIfNeeded, waitForConnected, waitForInViewport, waitForSelector, waitForElement, querySelectorsAll, querySelectorAll, waitForFunction };
+
