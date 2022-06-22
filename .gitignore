@@ -42,3 +42,5 @@
 .chrome/GrShaderCache/
 .chrome/DevToolsActivePort
 .chrome/chrome_shutdown_ms.txt
+.chrome/pnacl/
+.chrome/ClientSidePhishing/
