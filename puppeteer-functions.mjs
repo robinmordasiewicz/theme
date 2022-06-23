@@ -19,7 +19,7 @@
         element.scrollIntoView({
           block: 'center',
           inline: 'center',
-          behavior: 'auto',
+          behavior: 'smooth',
         });
       });
       await waitForInViewport(element, timeout);
